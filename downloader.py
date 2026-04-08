@@ -7,6 +7,8 @@ Catena: guarda-serie.click (data-link) → supervideo.cc/e/{ID} → master.m3u8 
 from __future__ import annotations
 
 
+import os
+import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -444,6 +446,9 @@ def download(
         ep_tasks.append(t)
 
     ok = fail = 0
+
+    # Clear terminale prima del download
+    os.system("cls" if os.name == "nt" else "clear")
 
     # Avvia listener tasti solo durante il download
     listener.start()
