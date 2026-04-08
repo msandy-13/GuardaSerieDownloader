@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.9+-blue.svg">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
-  <img src="https://img.shields.io/github/stars/msandy-13/guarda-serie-downloader.svg?style=social">
+  <img src="https://github.com/msandy-13/GuardaSerieDownloader.svg?style=social">
 </p>
 
 **Downloader CLI potente per guarda-serie.click**
