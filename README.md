@@ -3,6 +3,8 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.9+-blue.svg">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-red.svg">
+  <img src="https://img.shields.io/github/last-commit/msandy-13/GuardaSerieDownloader.svg">
 </p>
 
 **Downloader CLI per guarda-serie.click**
@@ -77,14 +79,14 @@ Con solo l'URL, il downloader:
 
 | Opzione | Default | Descrizione |
 |---|---|---|
-| `--output, -o` | `./downloads` | Cartella di destinazione |
-| `--quality, -q` | `best` | Qualità: `best`, `1080`, `720`, `worst` |
-| `--st` | `0` | Stagione singola (0 = tutte) |
-| `--ep` | `1` | Episodio iniziale |
-| `--stop` | `0` | Episodio finale (0 = fino alla fine) |
-| `--stagioni` | — | Più stagioni con range specifici (vedi sotto) |
-| `--workers, -w` | `2` | Download paralleli |
-| `--dry-run` | `False` | Mostra solo i link, non scarica |
+| `--output, -o` | `./downloads` | Cartella dove salvare i file |
+| `--quality, -q` | `best` | Qualità video: `best` · `1080` · `720` · `worst` |
+| `--workers, -w` | `2` | Numero di download in parallelo |
+| `--dry-run` | — | Mostra i link senza scaricare nulla |
+| `--st` | — | Scarica solo una stagione specifica (es. `--st 2`) |
+| `--ep` | `1` | Episodio iniziale *(usare con `--st`)* |
+| `--stop` | fine | Episodio finale *(usare con `--st`)* |
+| `--stagioni` | — | Più stagioni con range personalizzati *(vedi sezione dedicata)* |
 
 ---
 
