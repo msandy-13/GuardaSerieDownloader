@@ -1,186 +1,186 @@
 # 🎬 GuardaSerie Downloader
 
 <p align="center">
-  <img src="https://via.placeholder.com/900x300?text=GuardaSerie+Downloader" alt="preview">
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/python-3.9+-blue.svg">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
-  <img src="https://github.com/msandy-13/GuardaSerieDownloader.svg?style=social">
 </p>
 
-**Downloader CLI potente per guarda-serie.click**
+**Downloader CLI per guarda-serie.click**
 Scarica intere serie in **MP4** direttamente dagli stream HLS *(supervideo.cc + fallback dr0pstream)* usando **yt-dlp**.
 
 ---
 
-## ⚠️ Disclaimer importante
+## ⚠️ Disclaimer
 
 Questo tool è stato creato **solo per scopi educativi e personali**.
-L’autore non è responsabile per alcun uso improprio del software.
+L'autore non è responsabile per alcun uso improprio del software.
 
-* Scaricare contenuti protetti da copyright senza autorizzazione può violare le leggi del tuo Paese
-* Usa questo script **solo su contenuti di cui possiedi i diritti**
-* L’autore **non incoraggia né supporta la pirateria**
-* **Usa a tuo rischio e pericolo**
+- Scaricare contenuti protetti da copyright senza autorizzazione può violare le leggi del tuo Paese
+- Usa questo script **solo su contenuti di cui possiedi i diritti**
+- **Usa a tuo rischio e pericolo**
 
 ---
 
-## ✨ Features principali
+## ✨ Features
 
-* 🎯 Estrazione automatica di tutti gli episodi dalla pagina della serie
-* 🔍 Risoluzione intelligente dei player offuscati con fallback automatico
-* ⚡ Download parallelo *(3-4 worker consigliati)*
-* 📁 Organizzazione automatica: `Serie / Stagione X / Episodio.mp4`
-* ♻️ Skip file già scaricati + resume download interrotti
-* 🎛️ Supporto per range episodi, multi-stagioni e qualità personalizzata
-* 📊 Progress bar in tempo reale *(Rich)*
-* ⏹️ Premi **Q** per interrompere tutto
+- 🎯 Estrazione automatica di tutti gli episodi dalla pagina della serie
+- 🔍 Risoluzione dei player offuscati con fallback automatico
+- ⚡ Download parallelo configurabile
+- 📁 Organizzazione automatica: `downloads / Nome Serie / Stagione X / Episodio.mp4`
+- ♻️ Skip automatico dei file già scaricati + resume download interrotti
+- 🎛️ Filtro per stagioni, range episodi e qualità
+- 📊 Progress bar in tempo reale *(Rich)*
+- ⏹️ Premi **Q** per interrompere
 
 ---
 
 ## 🔧 Come funziona
 
 1. Analizza la pagina della serie su **guarda-serie.click**
-2. Estrae i player (supervideo, fallback)
-3. Deoffusca il codice per ottenere il link **.m3u8**
+2. Estrae i link dei player disponibili per ogni episodio
+3. Deoffusca il codice JavaScript per ottenere il link `.m3u8`
 4. Usa **yt-dlp** per scaricare e convertire in MP4
-5. Organizza automaticamente i file
+5. Organizza i file in cartelle per stagione
 
 Tutto avviene **in locale sul tuo PC**.
-
----
-
-## ⚙️ Requisiti
-
-* Python **3.9+**
-* Connessione stabile
 
 ---
 
 ## 🚀 Installazione
 
 ```bash
-git clone https://github.com/msandy-13/guarda-serie-downloader.git
-cd guarda-serie-downloader
-
+git clone https://github.com/msandy-13/GuardaSerieDownloader.git
+cd GuardaSerieDownloader
 pip install -r requirements.txt
-```
-
-### Opzione comando globale
-
-```bash
-pip install -e .
-```
-
-Poi puoi usare:
-
-```bash
-guarda-serie "URL_DELLA_SERIE"
 ```
 
 ---
 
-## 📖 Utilizzo base
+## 📖 Utilizzo
+
+### Comando minimo
 
 ```bash
 python downloader.py "https://guarda-serie.click/serietv/3176-adventure-time-streaming-ita.html"
 ```
 
----
-
-## 🎛️ Opzioni principali
-
-| Opzione         | Default       | Descrizione                        |
-| --------------- | ------------- | ---------------------------------- |
-| `--output, -o`  | `./downloads` | Cartella di destinazione           |
-| `--quality, -q` | `best`        | Qualità: best, 1080, 720, worst    |
-| `--st`          | `0`           | Stagione singola (0 = tutte)       |
-| `--ep`          | `1`           | Episodio iniziale                  |
-| `--stop`        | `0`           | Episodio finale                    |
-| `--stagioni`    | —             | Multi-stagioni (`"2 1 10/4 3 15"`) |
-| `--workers, -w` | `2`           | Download paralleli                 |
-| `--dry-run`     | `False`       | Solo preview link                  |
+Con solo l'URL, il downloader:
+- Scarica **tutte le stagioni** disponibili
+- Usa la **qualità migliore** disponibile
+- Salva tutto in `./downloads/Nome Serie/Stagione X/`
+- Usa **2 worker** paralleli
+- Salta automaticamente i file già presenti
 
 ---
 
-## ⚡ Esempi veloci
+## 🎛️ Opzioni
+
+| Opzione | Default | Descrizione |
+|---|---|---|
+| `--output, -o` | `./downloads` | Cartella di destinazione |
+| `--quality, -q` | `best` | Qualità: `best`, `1080`, `720`, `worst` |
+| `--st` | `0` | Stagione singola (0 = tutte) |
+| `--ep` | `1` | Episodio iniziale |
+| `--stop` | `0` | Episodio finale (0 = fino alla fine) |
+| `--stagioni` | — | Più stagioni con range specifici (vedi sotto) |
+| `--workers, -w` | `2` | Download paralleli |
+| `--dry-run` | `False` | Mostra solo i link, non scarica |
+
+---
+
+## ⚡ Esempi
 
 ```bash
-# Stagione completa
+# Tutta la serie (tutte le stagioni)
+python downloader.py <URL>
+
+# Solo la stagione 3 completa
 python downloader.py <URL> --st 3
 
-# Episodi specifici
+# Stagione 2, episodi 5-10
 python downloader.py <URL> --st 2 --ep 5 --stop 10
 
-# Multi-stagioni
+# Qualità 720p con 3 worker
+python downloader.py <URL> --quality 720 --workers 3
+
+# Solo anteprima link, nessun download
+python downloader.py <URL> --dry-run
+```
+
+---
+
+## 📦 Download multi-stagioni
+
+L'opzione `--stagioni` permette di scaricare più stagioni in una volta sola, ognuna con un range di episodi personalizzato.
+
+**Formato:** `"ST EP_INIZIO EP_FINE / ST EP_INIZIO EP_FINE / ..."`
+
+Ogni blocco separato da `/` rappresenta una stagione:
+
+| Parte | Significato |
+|---|---|
+| `ST` | Numero stagione |
+| `EP_INIZIO` | Episodio da cui partire (opzionale, default: 1) |
+| `EP_FINE` | Episodio a cui fermarsi (opzionale, default: fine) |
+
+**Esempi:**
+
+```bash
+# Stagione 2 completa + stagione 4 completa
+python downloader.py <URL> --stagioni "2/4"
+
+# Stagione 2 ep.1-10, stagione 4 ep.3-15
 python downloader.py <URL> --stagioni "2 1 10/4 3 15"
 
-# 720p con 3 download
-python downloader.py <URL> --quality 720 --workers 3
+# Stagione 1 ep.5 in poi, stagione 3 completa, stagione 5 ep.1-8
+python downloader.py <URL> --stagioni "1 5/3/5 1 8"
 ```
+
+> **Nota:** `--stagioni` e `--st` non si usano insieme. Se usi `--stagioni`, i parametri `--st`, `--ep` e `--stop` vengono ignorati.
 
 ---
 
 ## 📁 Struttura cartelle
 
-```bash
+```
 downloads/
 └── Nome Serie/
     ├── Stagione 1/
+    │   ├── 1x01 - Titolo Episodio.mp4
+    │   └── 1x02 - Titolo Episodio.mp4
     ├── Stagione 2/
     └── ...
 ```
 
 ---
 
-## 💡 Consigli d’uso
+## 💡 Consigli
 
-* Usa `--workers 2` se è la prima volta
-* Non superare **3-4 worker**
-* Se vedi errori 403 → aspetta e riprova
-* Usa `--dry-run` per testare prima
-* Puoi rilanciare il comando: i file già scaricati vengono saltati
-
----
-
-## ⏸️ Durante il download
-
-* Premi **Q** per fermare tutto
-* Resume automatico dei download
-* Skip automatico dei file già presenti
+- Inizia con `--workers 2` (default) per evitare errori 403
+- Non superare **3-4 worker** in parallelo
+- Usa `--dry-run` per verificare che tutti gli episodi si risolvano prima di scaricare
+- Se un download si interrompe, rilancia lo stesso comando: i file già completati vengono saltati
+- Errori 403 frequenti → aspetta qualche minuto e riprova
 
 ---
 
 ## ❓ Risoluzione problemi
 
-| Problema                | Soluzione                         |
-| ----------------------- | --------------------------------- |
-| Nessun episodio trovato | Controlla URL                     |
-| m3u8 non trovato        | Episodio rimosso                  |
-| Errore 403              | Riduci workers                    |
-| Dipendenze mancanti     | `pip install -r requirements.txt` |
+| Problema | Soluzione |
+|---|---|
+| Nessun episodio trovato | Controlla che l'URL sia corretto |
+| m3u8 non trovato | L'episodio potrebbe essere stato rimosso dal sito |
+| Errore 403 | Riduci i worker o aspetta prima di riprovare |
+| Dipendenze mancanti | `pip install -r requirements.txt` |
 
 ---
 
 ## 👤 Autore
 
-Creato da **msandy-13** 🇮🇹
+Creato da **msandy-13** 🇮🇹 — l'ho fatto perché mi serviva, magari serve anche a qualcun altro.
 
 ---
 
-## ❤️ Nota
+## 📄 Licenza
 
-Progetto semplice, senza complicazioni.
-L’ho fatto perché mi serviva — magari serve anche a qualcun altro.
-
----
-
-## 📄 License
-
-Licenza **MIT** — libero uso, modifica e distribuzione.
-
----
-
-> Made with ❤️ per chi vuole guardare le serie senza pubblicità e senza stress
+**MIT** — libero uso, modifica e distribuzione.
