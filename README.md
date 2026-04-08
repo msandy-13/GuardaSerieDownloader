@@ -15,7 +15,7 @@ Scarica intere serie in **MP4** direttamente dagli stream HLS *(supervideo.cc + 
 ## ⚠️ Disclaimer
 
 Questo tool è stato creato **solo per scopi educativi e personali**.
-L'autore non è responsabile per alcun uso improprio del software.
+Non sono responsabile per alcun uso improprio del software.
 
 - Scaricare contenuti protetti da copyright senza autorizzazione può violare le leggi del tuo Paese
 - Usa questo script **solo su contenuti di cui possiedi i diritti**
