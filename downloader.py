@@ -163,11 +163,18 @@ def extract_episodes(page_url: str, scraper: cloudscraper.CloudScraper) -> tuple
         if not players:
             continue
 
+        # Normalizza data_num in formato SxEE con zero padding (es. 1x5 → 1x05)
+        if data_num and "x" in data_num:
+            s, e = data_num.split("x", 1)
+            data_num_fmt = f"{s}x{e.zfill(2)}"
+        else:
+            data_num_fmt = data_num
+
         if data_title:
             short = data_title.split(":")[0].strip()
-            title = f"{data_num} - {short}" if data_num else short
+            title = f"{data_num_fmt} - {short}" if data_num_fmt else short
         else:
-            title = data_num or "Episodio"
+            title = data_num_fmt or "Episodio"
 
         episodes.append({"num": data_num, "title": title, "players": players})
 
