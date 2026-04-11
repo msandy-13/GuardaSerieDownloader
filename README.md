@@ -10,6 +10,9 @@
 **Downloader CLI per guarda-serie.click**
 Scarica intere serie in **MP4** direttamente dagli stream HLS *(supervideo.cc + fallback dr0pstream)* usando **yt-dlp**.
 
+![Demo](https://github.com/msandy-13/GuardaSerieDownloader/blob/main/asset/demo.png)
+
+
 ---
 
 ## ⚠️ Disclaimer
